@@ -1,37 +1,26 @@
-// window.onload = function donenow() {
-//   console.log('Hi');
-//   document.getElementById('divvy').addEventListener('mousedown', function () {
-//     changeColor(this, 'green');
-//   });
+let css = document.querySelector('h3');
+let color1 = document.querySelector('.color1');
+let color2 = document.querySelector('.color2');
+let body = document.querySelector('#gradient');
+let container = document.querySelector('.container');
 
-//   document.getElementById('divvy').addEventListener('mouseup', function () {
-//     changeColor(this, 'yellow');
-//   });
-//   document.getElementById('divvy').addEventListener('dblclick', function () {
-//     changeColor(this, 'black');
-//   });
-//   document.getElementById('divvy').addEventListener('mouseout', function () {
-//     changeColor(this, 'blue');
-//   });
-// };
+function setGradient() {
+  body.style.background =
+    'linear-gradient(to right, ' + color1.value + ', ' + color2.value + ')';
+  css.textContent = body.style.background + ';';
+}
 
-// function changeColor(el, color) {
-//   el.style.backgroundColor = color;
-// }
+let copyButton = document.createElement('button');
+copyButton.innerText = 'Copy';
+copyButton.setAttribute('id', 'copy');
+container.appendChild(copyButton);
 
-let div = document.querySelector('.divvy');
-let inputColor = document.getElementById('color').value;
-console.log(inputColor);
-div.innerText = 'Hello World';
-div.style.width = '200px';
-div.style.height = '200px';
-div.style.backgroundColor = "red";
+copyButton.addEventListener('click', () => {
+  let copyCss = css.textContent;
 
-div.addEventListener('mouseup', function (e) {
-  changeColor('yellow', e);
+  navigator.clipboard.writeText(copyCss);
+  alert('CSS Copied' + copyCss);
 });
 
-function changeColor(color, e) {
-  console.log(e.type);
-  div.style.backgroundColor = color;
-}
+color1.addEventListener('input', setGradient);
+color2.addEventListener('input', setGradient);
